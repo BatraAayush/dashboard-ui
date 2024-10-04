@@ -41,6 +41,6 @@ Follow these steps to get your development environment set up:
 - Source Code: [https://github.com/BatraAayush/dashboard-ui](https://github.com/BatraAayush/dashboard-ui)
 - Live Link: [https://device-dashboard-ab.netlify.app/](https://device-dashboard-ab.netlify.app/)
 
-### Brontend
+### Backend
 - Source Code: [https://github.com/BatraAayush/dashboard-api](https://github.com/BatraAayush/dashboard-api)
 - Live Link: [https://dashboard-api-iota.vercel.app/](https://dashboard-api-iota.vercel.app/)
