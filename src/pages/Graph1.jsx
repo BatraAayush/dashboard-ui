@@ -3,19 +3,17 @@ import { Bar } from "react-chartjs-2";
 import moment from "moment";
 import { useData } from "../contexts/DataContext";
 
-// Import and register required components from Chart.js
 import {
   Chart as ChartJS,
-  CategoryScale, // For the x-axis (categories)
-  LinearScale, // For the y-axis (linear values)
-  BarElement, // For bar chart rendering
+  CategoryScale, 
+  LinearScale,
+  BarElement, 
   Title,
   Tooltip,
   Legend,
 } from "chart.js";
 import Loader from "../components/Loader";
 
-// Register the components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -28,7 +26,7 @@ ChartJS.register(
 const Graph1 = () => {
   const { data, fetchData } = useData();
   const [chartData, setChartData] = useState(null);
-  const [timeFrame, setTimeFrame] = useState("day"); // State for selected time frame
+  const [timeFrame, setTimeFrame] = useState("day");
 
   const calculateAverages = (data, timeframe) => {
     const groupedData = data.reduce((acc, item) => {
@@ -38,7 +36,6 @@ const Graph1 = () => {
       } else if (timeframe === "week") {
         timePeriod = moment(item.start_time).format("YYYY-[W]W");
       } else {
-        // month
         timePeriod = moment(item.start_time).format("YYYY-MM");
       }
       if (!acc[timePeriod]) {
@@ -78,7 +75,7 @@ const Graph1 = () => {
         ],
       });
     }
-  }, [data, timeFrame]); // Update chart when time frame changes
+  }, [data, timeFrame]);
 
   return (
     <div className="m-4">
@@ -126,9 +123,9 @@ const Graph1 = () => {
                       text: "Average MBRT",
                     },
                     min: 0,
-                    max: 2000, // Fixed max value
+                    max: 2000, 
                     ticks: {
-                      stepSize: 100, // Adjusted step size for ticks
+                      stepSize: 100, 
                     },
                   },
                   x: {
@@ -142,15 +139,15 @@ const Graph1 = () => {
                           : "Date",
                     },
                     ticks: {
-                      autoSkip: false, // Ensure all ticks (labels) are shown
-                      maxTicksLimit: 103, // Limit to the expected number of data points
-                      maxRotation: 45, // Rotate labels by 45 degrees
-                      minRotation: 45, // Minimum rotation for better readability
+                      autoSkip: false, 
+                      maxTicksLimit: 103,
+                      maxRotation: 45, 
+                      minRotation: 45,
                     },
                   },
                 },
               }}
-              height={400} // Set the height of the chart
+              height={400}
             />
           </div>
         </div>

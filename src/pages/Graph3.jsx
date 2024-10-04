@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Bar, Line, Scatter } from "react-chartjs-2"; // Import necessary chart types
-import { useData } from "../contexts/DataContext"; // Context to fetch data
+import { Bar, Line, Scatter } from "react-chartjs-2";
+import { useData } from "../contexts/DataContext";
 import {
   Chart as ChartJS,
-  CategoryScale, // For the x-axis (categories)
-  LinearScale, // For the y-axis (linear values)
-  BarElement, // For bar chart rendering
-  LineElement, // For line chart rendering
-  PointElement, // For points in scatter chart
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
   Title,
   Tooltip,
   Legend,
 } from "chart.js";
 import Loader from "../components/Loader";
 
-// Register required components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -29,12 +28,12 @@ ChartJS.register(
 const Graph3 = () => {
   const { data, fetchData } = useData();
   const [chartData, setChartData] = useState(null);
-  const [chartType, setChartType] = useState("bar"); // Default chart type
+  const [chartType, setChartType] = useState("bar");
 
   const calculateAverageTimePerDevice = (data) => {
     const averageTimeData = data.reduce((acc, item) => {
-      const device = item.device; // Assume device is a property in your data
-      const mbrtValue = item.mbrt; // Using mbrt for average calculation
+      const device = item.device;
+      const mbrtValue = item.mbrt;
 
       if (!acc[device]) {
         acc[device] = { total: 0, count: 0 };
@@ -60,9 +59,8 @@ const Graph3 = () => {
       const labels = averageTimeData.map((entry) => entry.device);
       const averageTimes = averageTimeData.map((entry) => entry.avgTime);
 
-      // Prepare data for Scatter Chart
       const scatterData = averageTimeData.map((entry, index) => ({
-        x: index, // Using index as x value
+        x: index,
         y: entry.avgTime,
       }));
 
@@ -71,7 +69,7 @@ const Graph3 = () => {
         datasets: [
           {
             label: "Average Time per Device",
-            data: chartType === "scatter" ? scatterData : averageTimes, // Use scatter data for scatter chart
+            data: chartType === "scatter" ? scatterData : averageTimes,
             backgroundColor: "rgba(75, 192, 192, 0.6)",
             borderColor: "rgba(75, 192, 192, 1)",
             borderWidth: 1,
@@ -79,7 +77,7 @@ const Graph3 = () => {
         ],
       });
     }
-  }, [data, chartType]); // Include chartType in the dependencies
+  }, [data, chartType]);
 
   const renderChart = () => {
     switch (chartType) {
@@ -113,13 +111,13 @@ const Graph3 = () => {
         },
         ticks: {
           autoSkip: true,
-          maxTicksLimit: 10, // Adjust based on your data density
+          maxTicksLimit: 10,
         },
       },
       y: {
         title: {
           display: true,
-          text: "Average MBRT", // Change according to your time unit
+          text: "Average MBRT",
         },
         beginAtZero: true,
       },
@@ -162,7 +160,7 @@ const Graph3 = () => {
       </div>
 
       <div style={{ overflowX: "auto", marginTop: "20px" }}>
-        {chartData ? renderChart() : <Loader/>}
+        {chartData ? renderChart() : <Loader />}
       </div>
     </div>
   );

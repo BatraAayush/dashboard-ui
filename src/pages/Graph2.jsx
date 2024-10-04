@@ -32,7 +32,7 @@ const Graph2 = () => {
 
   const calculatePeakTime = (data) => {
     const peakTimeData = data.reduce((acc, item) => {
-      const time = moment(item.start_time).format("YYYY-MM-DD HH:00"); // Group by hour
+      const time = moment(item.start_time).format("YYYY-MM-DD HH:00");
       if (!acc[time]) {
         acc[time] = 0;
       }
@@ -64,7 +64,7 @@ const Graph2 = () => {
             data: usageValues,
             fill: false,
             borderColor: "rgba(75, 192, 192, 1)",
-            tension: 0.3, // Slightly less tension for a smoother line
+            tension: 0.3,
           },
         ],
       });
@@ -92,7 +92,7 @@ const Graph2 = () => {
                     },
                     ticks: {
                       autoSkip: true,
-                      maxTicksLimit: 50, // Adjust based on your data density
+                      maxTicksLimit: 50,
                       maxRotation: 45,
                       minRotation: 45,
                     },
@@ -104,9 +104,9 @@ const Graph2 = () => {
                     },
                     beginAtZero: true,
                     ticks: {
-                      stepSize: 1, // Adjust the step size for better visibility
+                      stepSize: 1,
                       callback: function (value) {
-                        return Number.isInteger(value) ? value : null; // Only show integer ticks
+                        return Number.isInteger(value) ? value : null;
                       },
                     },
                   },
